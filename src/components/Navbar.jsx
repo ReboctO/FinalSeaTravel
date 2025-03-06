@@ -1,16 +1,12 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
-
+import logo from "../assets/ship.avif";
 const Navbar = () => {
   return (
     <AppBar position="static" className="bg-white text-gray-800 shadow-none">
       <Toolbar className="container mx-auto px-4 py-2 flex justify-between items-center">
         <Box className="flex items-center">
-          <img
-            src="/your-ship-image.png"
-            alt="Ship Logo"
-            className="h-10 mr-2"
-          />
+          <img src={logo} alt="Ship Logo" className="h-10 mr-2" />
           <Typography variant="h6" className="font-bold">
             AVENTURES
           </Typography>

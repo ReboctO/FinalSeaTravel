@@ -8,7 +8,7 @@ export default function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar /> {/* Navbar should only be called once */}
+        <Navbar />
         <Routes>
           <Route index element={<Home />} />
         </Routes>
