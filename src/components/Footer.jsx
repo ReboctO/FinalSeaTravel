@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Stack, Link } from "@mui/material";
+import { Box, Typography, Stack, Link, Divider } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -7,39 +7,44 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const Footer = () => {
   return (
-    <Box component="footer" sx={{ backgroundColor: "#f8f9fa", py: 4, px: 2, borderTop: "4px solid #003366" }}>
+    <Box
+      component="footer"
+      sx={{
+        backgroundColor: "white",
+        py: 4,
+        px: 2,
+        borderTop: "4px solid #003366",
+      }}
+    >
       <Stack
         direction={{ xs: "column", md: "row" }}
         justifyContent="space-between"
-        alignItems="flex-start"
-        spacing={4}
+        alignItems="center"
+        spacing={{ xs: 3, md: 5 }}
       >
         {/* Company Address */}
         <Stack spacing={1} textAlign={{ xs: "center", md: "left" }}>
           <Typography variant="body2" fontWeight="bold">
-            PT SEAVENTURES (Persero) HQ
+            SEATRAVELS HQ
           </Typography>
-          <Typography variant="body2">
-            Jl. Gajah Mada No. 14, Jakarta Pusat, 10130 DKI Jakarta, Indonesia
-          </Typography>
+          <Typography variant="body2">132 My Street, Kingston, Cebu City 6000</Typography>
         </Stack>
 
         {/* Contact Info */}
         <Stack spacing={1} textAlign={{ xs: "center", md: "left" }}>
           <Typography variant="body2" fontWeight="bold">
-            PT SEAVENTURES (Persero) HQ
+            CONTACT US
           </Typography>
-          <Typography variant="body2">T. 162 (Jabodetabek)</Typography>
-          <Typography variant="body2">F. +62 21 6385 4130</Typography>
-          <Typography variant="body2">E. infosea162@seaventures.co.id</Typography>
+          <Typography variant="body2">091234567891</Typography>
+          <Typography variant="body2">Seatravels@shippinglines.com</Typography>
         </Stack>
 
         {/* Social Media */}
-        <Stack spacing={1} textAlign={{ xs: "center", md: "left" }}>
+        <Stack spacing={1} textAlign="center">
           <Typography variant="body2" fontWeight="bold">
-            Media Sosial
+            FOLLOW US
           </Typography>
-          <Box display="flex" gap={1}>
+          <Box display="flex" gap={2} justifyContent="center">
             <Link href="#" color="inherit">
               <InstagramIcon fontSize="medium" />
             </Link>
@@ -55,20 +60,37 @@ const Footer = () => {
           </Box>
         </Stack>
 
-        {/* Logo and Tagline */}
-        <Box textAlign={{ xs: "center", md: "right" }}>
-          <img src="/your-ship-logo.png" alt="Seaventures Logo" style={{ height: "50px" }} />
-          <Typography variant="body2" fontWeight="bold" mt={1}>
-            Easy Ship Booking
+        {/* Logo & Tagline */}
+        <Box textAlign="center">
+          <img
+            src="/images/Logo.png"
+            alt="Seatravels Logo"
+            style={{
+              height: "80px",
+              width: "100px",
+              display: "block",
+              margin: "0 auto",
+            }}
+          />
+          <Typography
+            variant="h6"
+            sx={{
+              textTransform: "uppercase",
+              fontFamily: "Poppins",
+              fontSize: "16px",
+              fontStyle: "italic",
+              mt: 1,
+            }}
+          >
+            S E A T R A V E L S
           </Typography>
         </Box>
       </Stack>
 
-      {/* Footer Bottom Section */}
-      <Box mt={4} textAlign="center">
-        <Typography variant="body2">
-          &copy; 2018-2023 PT. Seaventures Indonesia. All Rights Reserved.
-        </Typography>
+      {/* Divider & Copyright */}
+      <Divider sx={{ my: 3 }} />
+      <Box textAlign="center">
+        <Typography variant="body2">&copy; 2025 Seatravels Cebu City. All Rights Reserved.</Typography>
       </Box>
     </Box>
   );
