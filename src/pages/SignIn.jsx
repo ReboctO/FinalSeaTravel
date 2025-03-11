@@ -1,10 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GoogleIcon from "@mui/icons-material/Google";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/api/signin", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", response.data.token);
+      alert("Login successful");
+      navigate("/dashboard"); // Redirect user to dashboard
+    } catch (error) {
+      alert("Invalid email or password");
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -21,7 +42,7 @@ const SignIn = () => {
     >
       <Box
         sx={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)", // Darker overlay for better readability
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
           padding: 4,
           borderRadius: 2,
           boxShadow: 3,
@@ -39,7 +60,6 @@ const SignIn = () => {
           </Link>
         </Typography>
 
-        {/* Social Login Buttons */}
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
           <Button variant="contained" sx={{ backgroundColor: "#1877F2", color: "white" }}>
             <FacebookIcon sx={{ mr: 1 }} /> Facebook
@@ -50,14 +70,16 @@ const SignIn = () => {
         </Box>
 
         {/* Form */}
-        <Box component="form" sx={{ mt: 3 }}>
+        <Box component="form" sx={{ mt: 3 }} onSubmit={handleSubmit}>
           <TextField
             fullWidth
             label="Email Address"
             variant="outlined"
             margin="normal"
-            InputLabelProps={{ style: { color: "white" } }} // White label text
-            InputProps={{ style: { color: "white", borderColor: "white" } }} // White input text
+            InputLabelProps={{ style: { color: "white" } }}
+            InputProps={{ style: { color: "white" } }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             fullWidth
@@ -66,7 +88,9 @@ const SignIn = () => {
             variant="outlined"
             margin="normal"
             InputLabelProps={{ style: { color: "white" } }}
-            InputProps={{ style: { color: "white", borderColor: "white" } }}
+            InputProps={{ style: { color: "white" } }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Typography align="right" sx={{ mt: 1 }}>
             <Link to="/forgot-password" style={{ color: "white", textDecoration: "underline" }}>
@@ -74,6 +98,7 @@ const SignIn = () => {
             </Link>
           </Typography>
           <Button
+            type="submit"
             fullWidth
             variant="contained"
             sx={{ backgroundColor: "#FFC107", color: "black", mt: 2 }}
