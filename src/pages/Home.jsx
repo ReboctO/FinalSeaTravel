@@ -17,6 +17,8 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { SwapHoriz } from "@mui/icons-material";
+import LatestOffers from "./LatestOffers";
+import ContactUs from "./ContactUs";
 
 export default function Home() {
   const [shippingLine, setShippingLine] = useState("Blue Star Ferries");
@@ -38,14 +40,14 @@ export default function Home() {
         <Container>
           <Box
             sx={{
-              backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
               padding: "16px",
               borderRadius: "20px",
               textAlign: "center",
               color: "white",
               maxWidth: "550px",
               margin: "auto",
-              fontFamily: "Roboto, sans-serif", // Applied globally in this Box
+              fontFamily: "Roboto, sans-serif",
             }}
           >
             <Typography
@@ -338,6 +340,8 @@ export default function Home() {
           </Box>
         </Container>
       </Box>
+      <LatestOffers />
+      <ContactUs />
     </>
   );
 }
