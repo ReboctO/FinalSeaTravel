@@ -29,7 +29,7 @@ export default function Home() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundImage: 'url("/images/BG.jpg")',
+          backgroundImage: 'url("src/images/BG.jpg")',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

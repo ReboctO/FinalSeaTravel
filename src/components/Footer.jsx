@@ -63,7 +63,7 @@ const Footer = () => {
         {/* Logo & Tagline */}
         <Box textAlign="center">
           <img
-            src="/images/Logo.png"
+            src="src/images/Logo.png"
             alt="Seatravels Logo"
             style={{
               height: "80px",

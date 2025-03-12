@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Transaction from "./pages/Transaction";
 import LatestOffers from "./pages/LatestOffers";
 import ContactUs from "./pages/ContactUs";
+import SignIn from "./pages/SignIn";
 
 export default function App() {
   return (
@@ -17,7 +18,8 @@ export default function App() {
           <Route path="/transaction" element={<Transaction />} />
           <Route path="/latestOffers" element={<LatestOffers />} />
           <Route path="/contactUs" element={<ContactUs />} />
-        </Routes>
+          <Route path="/signin" element={<SignIn />} />
+          </Routes>
         <Footer />
       </BrowserRouter>
     </div>

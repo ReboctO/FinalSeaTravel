@@ -5,16 +5,11 @@ import {
   Typography,
   Button,
   Box,
-  Container,
-  TextField,
-  Select,
-  MenuItem,
   IconButton,
   Drawer,
   List,
   ListItem,
   ListItemText,
-  InputAdornment,
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { Link } from "react-router-dom";
@@ -22,10 +17,17 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   return (
-    <div>
+    <>
       <AppBar
-        position="static"
-        sx={{ backgroundColor: "white", color: "black", boxShadow: "none" }}
+        position="fixed" // Changed from "static" to "fixed"
+        sx={{
+          backgroundColor: "white",
+          color: "black",
+          boxShadow: "none",
+          top: 0,
+          zIndex: 1100, // Ensures it stays above other content
+          width: "100%", // Ensures it spans across the screen
+        }}
       >
         <Toolbar
           sx={{ display: "flex", justifyContent: "space-between", px: 3 }}
@@ -37,7 +39,7 @@ export default function Navbar() {
             to="/"
           >
             <img
-              src="/images/Logo.png"
+              src="src/images/Logo.png"
               alt="Ship Logo"
               style={{
                 height: "70px",
@@ -104,6 +106,8 @@ export default function Navbar() {
                 fontSize: "12px",
                 "&:hover": { borderColor: "#666", color: "#666" },
               }}
+              component={Link}
+              to="/SignIn"
             >
               Sign In
             </Button>
@@ -118,6 +122,9 @@ export default function Navbar() {
           </IconButton>
         </Toolbar>
       </AppBar>
+
+      {/* Spacer to prevent content from hiding under navbar */}
+      <Box sx={{ height: "80px" }} />  
 
       {/* Mobile Drawer */}
       <Drawer
@@ -141,6 +148,6 @@ export default function Navbar() {
           ))}
         </List>
       </Drawer>
-    </div>
+    </>
   );
 }
