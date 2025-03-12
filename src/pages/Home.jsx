@@ -9,25 +9,30 @@ import {
   TextField,
   Select,
   MenuItem,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  InputAdornment,
 } from "@mui/material";
-import { SwapHoriz } from "@mui/icons-material";
+import { SwapHoriz, } from "@mui/icons-material";
 import LatestOffers from "./LatestOffers";
 import ContactUs from "./ContactUs";
 
+
+
 export default function Home() {
-  const [shippingLine, setShippingLine] = useState("Blue Star Ferries");
+  const [shippingLine, setShippingLine] = useState("Lite Ferries");
+  const [adults, setAdults] = useState(0);
+  const [children, setChildren] = useState(0);
+
+  const incrementAdults = () => setAdults(adults + 1);
+  const decrementAdults = () => setAdults(adults > 0 ? adults - 1 : 0);
+  
+  const incrementChildren = () => setChildren(children + 1);
+  const decrementChildren = () => setChildren(children > 0 ? children - 1 : 0);
+
   return (
     <>
       <Box
         sx={{
           height: "100vh",
-          width: "100vw",
+          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -35,38 +40,29 @@ export default function Home() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          margin: "0px",
         }}
       >
-        <Container>
+        <Container maxWidth="lg">
           <Box
             sx={{
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              padding: "16px",
-              borderRadius: "20px",
+              backgroundColor: "rgba(0, 51, 102, 0.5)",
+              padding: "10px",
               textAlign: "center",
               color: "white",
               maxWidth: "550px",
               margin: "auto",
               fontFamily: "Roboto, sans-serif",
+              borderRadius: "15px"
             }}
           >
-            <Typography
-              variant="h4"
-              fontWeight="bold"
-              mb={2}
-              sx={{ fontFamily: "Roboto, sans-serif" }}
-            >
+            <Typography variant="h4" fontWeight="bold" mb={5} margin={2.5}>
               Find Your Trip
             </Typography>
-            <Typography
-              variant="subtitle1"
-              mb={3}
-              sx={{ fontFamily: "Roboto, sans-serif" }}
-            >
+            <Typography variant="subtitle1" mb={3}>
               Set Your Arrival and Departure Schedule at the Port
             </Typography>
 
-            {/* Form */}
             <Box
               sx={{
                 display: "grid",
@@ -75,14 +71,10 @@ export default function Home() {
                 alignItems: "center",
                 padding: "16px",
                 borderRadius: "8px",
+                margin: "10px",
               }}
             >
-              <Typography
-                gridColumn="span 3"
-                variant="body1"
-                fontSize="12px"
-                textAlign="left"
-              >
+              <Typography gridColumn="span 3" variant="body1" fontSize="12px">
                 Travel Destination
               </Typography>
               <TextField
@@ -91,76 +83,50 @@ export default function Home() {
                 size="small"
                 fullWidth
                 sx={{
-                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  backgroundColor: "white",
                   borderRadius: "5px",
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": { borderColor: "black" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
                   },
                 }}
-                InputLabelProps={{ sx: { color: "white" } }}
-                inputProps={{
-                  sx: { color: "white", fontFamily: "Roboto, sans-serif" },
-                }}
+                InputLabelProps={{ sx: { color: "black" } }}
+                inputProps={{ sx: { color: "black" } }}
               />
               <SwapHoriz sx={{ fontSize: "30px", color: "white" }} />
-
               <TextField
                 label="Enter Destination City/Port"
                 variant="outlined"
                 size="small"
                 fullWidth
                 sx={{
-                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  backgroundColor: "white",
                   borderRadius: "5px",
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": { borderColor: "black" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
                   },
                 }}
-                InputLabelProps={{ sx: { color: "white" } }}
-                inputProps={{
-                  sx: { color: "white", fontFamily: "Roboto, sans-serif" },
-                }}
+                InputLabelProps={{ sx: { color: "black" } }}
+                inputProps={{ sx: { color: "black" } }}
               />
 
-              <Typography
-                gridColumn="span 3"
-                variant="body1"
-                fontSize="12px"
-                textAlign="left"
-              >
+              <Typography gridColumn="span 3" variant="body1" fontSize="12px">
                 Departure Date
               </Typography>
               <TextField
                 type="date"
-                InputLabelProps={{ shrink: true, sx: { color: "white" } }}
+                InputLabelProps={{ shrink: true, sx: { color: "black" } }}
                 variant="outlined"
                 size="small"
                 fullWidth
                 sx={{
                   gridColumn: "span 3",
-                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  backgroundColor: "white",
                   borderRadius: "5px",
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": { borderColor: "black" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
-                  },
                 }}
-                inputProps={{
-                  sx: { color: "white", fontFamily: "Roboto, sans-serif" },
-                }}
+                inputProps={{ sx: { color: "black" } }}
               />
 
-              <Typography
-                gridColumn="span 3"
-                variant="body1"
-                fontSize="12px"
-                textAlign="left"
-              >
+              <Typography gridColumn="span 3" variant="body1" fontSize="12px">
                 Select Shipping Lines
               </Typography>
               <Select
@@ -171,19 +137,9 @@ export default function Home() {
                 fullWidth
                 sx={{
                   gridColumn: "span 3",
-                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  backgroundColor: "white",
                   borderRadius: "5px",
-                  color: "white",
-                  fontFamily: "Roboto, sans-serif",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "white",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "white",
-                  },
+                  color: "black",
                 }}
               >
                 <MenuItem value="Blue Star Ferries">Blue Star Ferries</MenuItem>
@@ -196,6 +152,7 @@ export default function Home() {
                 </MenuItem>
               </Select>
 
+              {/* Passenger Count */}
               <Box
                 sx={{
                   display: "flex",
@@ -232,6 +189,7 @@ export default function Home() {
                       color: "black",
                       minWidth: "30px",
                     }}
+                    onClick={decrementAdults}
                   >
                     -
                   </Button>
@@ -239,7 +197,7 @@ export default function Home() {
                     variant="body1"
                     sx={{ margin: "0 10px", fontFamily: "Roboto, sans-serif" }}
                   >
-                    0
+                    {adults}
                   </Typography>
                   <Button
                     variant="contained"
@@ -249,6 +207,7 @@ export default function Home() {
                       color: "black",
                       minWidth: "30px",
                     }}
+                    onClick={incrementAdults}
                   >
                     +
                   </Button>
@@ -283,6 +242,7 @@ export default function Home() {
                       color: "black",
                       minWidth: "30px",
                     }}
+                    onClick={decrementChildren}
                   >
                     -
                   </Button>
@@ -290,7 +250,7 @@ export default function Home() {
                     variant="body1"
                     sx={{ margin: "0 10px", fontFamily: "Roboto, sans-serif" }}
                   >
-                    0
+                    {children}
                   </Typography>
                   <Button
                     variant="contained"
@@ -300,6 +260,7 @@ export default function Home() {
                       color: "black",
                       minWidth: "30px",
                     }}
+                    onClick={incrementChildren}
                   >
                     +
                   </Button>
@@ -310,30 +271,21 @@ export default function Home() {
                 variant="contained"
                 fullWidth
                 sx={{
-                  backgroundColor: "#A2EB51",
-                  color: "#000",
+                  backgroundColor: "#0855b1",
+                  color: "white",
                   fontWeight: "bold",
-                  "&:hover": { backgroundColor: "#90D841" },
+                  "&:hover": { backgroundColor: "#505A5B" },
                   gridColumn: "span 3",
                   marginTop: "10px",
-                  fontFamily: "Roboto, sans-serif",
                 }}
               >
                 Find Your Ticket
               </Button>
-
-              <Button
-                variant="outlined"
-                fullWidth
-                sx={{
-                  color: "#fff",
-                  borderColor: "#A2EB51",
-                  fontWeight: "bold",
-                  "&:hover": { backgroundColor: "rgba(162, 235, 81, 0.2)" },
-                  gridColumn: "span 3",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
+              <Button variant="outlined" fullWidth sx={{borderColor:"rgba(80, 90, 91, 0.5)", 
+                backgroundColor: "#0855b1", 
+                color: "white", fontWeight: "bold", 
+                "&:hover": { backgroundColor: "#505A5B" }, 
+                gridColumn: "span 3", marginTop: "10px" }}>
                 Manage My Bookings
               </Button>
             </Box>

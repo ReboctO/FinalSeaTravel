@@ -10,10 +10,10 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "white",
+        backgroundColor: "#505A5B",
         py: 4,
         px: 2,
-        borderTop: "4px solid #003366",
+        color: "white", // Ensure all text is white
       }}
     >
       <Stack
@@ -24,38 +24,40 @@ const Footer = () => {
       >
         {/* Company Address */}
         <Stack spacing={1} textAlign={{ xs: "center", md: "left" }}>
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold" color="white">
             SEATRAVELS HQ
           </Typography>
-          <Typography variant="body2">132 My Street, Kingston, Cebu City 6000</Typography>
+          <Typography variant="body2" color="white">
+            132 My Street, Kingston, Cebu City 6000
+          </Typography>
         </Stack>
 
         {/* Contact Info */}
         <Stack spacing={1} textAlign={{ xs: "center", md: "left" }}>
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold" color="white">
             CONTACT US
           </Typography>
-          <Typography variant="body2">091234567891</Typography>
-          <Typography variant="body2">Seatravels@shippinglines.com</Typography>
+          <Typography variant="body2" color="white">091234567891</Typography>
+          <Typography variant="body2" color="white">Seatravels@shippinglines.com</Typography>
         </Stack>
 
         {/* Social Media */}
         <Stack spacing={1} textAlign="center">
-          <Typography variant="body2" fontWeight="bold">
+          <Typography variant="body2" fontWeight="bold" color="white">
             FOLLOW US
           </Typography>
           <Box display="flex" gap={2} justifyContent="center">
             <Link href="#" color="inherit">
-              <InstagramIcon fontSize="medium" />
+              <InstagramIcon fontSize="medium" sx={{ color: "white" }} />
             </Link>
             <Link href="#" color="inherit">
-              <TwitterIcon fontSize="medium" />
+              <TwitterIcon fontSize="medium" sx={{ color: "white" }} />
             </Link>
             <Link href="#" color="inherit">
-              <FacebookIcon fontSize="medium" />
+              <FacebookIcon fontSize="medium" sx={{ color: "white" }} />
             </Link>
             <Link href="#" color="inherit">
-              <YouTubeIcon fontSize="medium" />
+              <YouTubeIcon fontSize="medium" sx={{ color: "white" }} />
             </Link>
           </Box>
         </Stack>
@@ -80,6 +82,7 @@ const Footer = () => {
               fontSize: "16px",
               fontStyle: "italic",
               mt: 1,
+              color: "white",
             }}
           >
             S E A T R A V E L S
@@ -88,9 +91,11 @@ const Footer = () => {
       </Stack>
 
       {/* Divider & Copyright */}
-      <Divider sx={{ my: 3 }} />
+      <Divider sx={{ my: 3, backgroundColor: "white" }} />
       <Box textAlign="center">
-        <Typography variant="body2">&copy; 2025 Seatravels Cebu City. All Rights Reserved.</Typography>
+        <Typography variant="body2" color="white">
+          &copy; 2025 Seatravels Cebu City. All Rights Reserved.
+        </Typography>
       </Box>
     </Box>
   );

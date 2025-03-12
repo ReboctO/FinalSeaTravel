@@ -19,19 +19,17 @@ export default function Navbar() {
   return (
     <>
       <AppBar
-        position="fixed" // Changed from "static" to "fixed"
+        position="fixed"
         sx={{
-          backgroundColor: "white",
-          color: "black",
+          backgroundColor: "#003366",
+          color: "white",
           boxShadow: "none",
           top: 0,
-          zIndex: 1100, // Ensures it stays above other content
-          width: "100%", // Ensures it spans across the screen
+          zIndex: 1100,
+          width: "100%",
         }}
       >
-        <Toolbar
-          sx={{ display: "flex", justifyContent: "space-between", px: 3 }}
-        >
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 3 }}>
           {/* Logo */}
           <Box
             sx={{ display: "flex", alignItems: "center", gap: 1 }}
@@ -42,7 +40,7 @@ export default function Navbar() {
               src="src/images/Logo.png"
               alt="Ship Logo"
               style={{
-                height: "70px",
+                height: "80px",
                 width: "80px",
               }}
             />
@@ -53,6 +51,7 @@ export default function Navbar() {
                 fontFamily: "Poppins",
                 fontSize: { xs: "20px", sm: "25px", md: "30px" },
                 fontStyle: "italic",
+                color: "white",
               }}
             >
               S E A T R A V E L S
@@ -67,44 +66,28 @@ export default function Navbar() {
               gap: 3,
             }}
           >
-            <Button
-              sx={{ color: "black", fontSize: "12px" }}
-              component={Link}
-              to="/"
-            >
+            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/">
               Home
             </Button>
-            <Button
-              sx={{ color: "black", fontSize: "12px" }}
-              component={Link}
-              to="/transaction"
-            >
+            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/transaction">
               Transaction
             </Button>
-            <Button
-              sx={{ color: "black", fontSize: "12px" }}
-              component={Link}
-              to="/latestOffers"
-            >
+            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/latestOffers">
               Latest Offers
             </Button>
-            <Button
-              sx={{ color: "black", fontSize: "12px" }}
-              component={Link}
-              to="/contactUs"
-            >
+            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/contactUs">
               Contact Us
             </Button>
-            <Button sx={{ color: "black", fontSize: "12px" }}>ID</Button>
-            <span>|</span>
-            <Button sx={{ color: "black", fontSize: "12px" }}>EN</Button>
+            <Button sx={{ color: "white", fontSize: "12px" }}>ID</Button>
+            <span style={{ color: "white" }}>|</span>
+            <Button sx={{ color: "white", fontSize: "12px" }}>EN</Button>
             <Button
               variant="outlined"
               sx={{
-                color: "black",
-                borderColor: "black",
+                color: "white",
+                borderColor: "white",
                 fontSize: "12px",
-                "&:hover": { borderColor: "#666", color: "#666" },
+                "&:hover": { borderColor: "#CCC", color: "#CCC" },
               }}
               component={Link}
               to="/SignIn"
@@ -115,7 +98,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <IconButton
-            sx={{ display: { xs: "block", md: "none" } }}
+            sx={{ display: { xs: "block", md: "none" }, color: "white" }}
             onClick={() => setDrawerOpen(true)}
           >
             <MenuIcon />
@@ -124,28 +107,26 @@ export default function Navbar() {
       </AppBar>
 
       {/* Spacer to prevent content from hiding under navbar */}
-      <Box sx={{ height: "80px" }} />  
+      <Box sx={{ height: "80px" }} />
 
       {/* Mobile Drawer */}
       <Drawer
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
+        sx={{ ".MuiDrawer-paper": { backgroundColor: "#003366" } }}
       >
         <List>
-          {[
-            "Home",
-            "Transaction",
-            "Latest Offers",
-            "Contact Us",
-            "ID",
-            "EN",
-            "Sign In",
-          ].map((text) => (
-            <ListItem button key={text} onClick={() => setDrawerOpen(false)}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          {["Home", "Transaction", "Latest Offers", "Contact Us", "ID", "EN", "Sign In"].map(
+            (text) => (
+              <ListItem button key={text} onClick={() => setDrawerOpen(false)}>
+                <ListItemText
+                  primary={text}
+                  sx={{ color: "white", textAlign: "center" }}
+                />
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
     </>

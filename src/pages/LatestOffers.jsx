@@ -1,97 +1,164 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import {
+  Typography,
+  Button,
+  Box,
+  Card,
+  CardMedia,
+  CardContent,
+  IconButton,
+  Container
+} from "@mui/material";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
 export default function LatestOffers() {
   const scrollRef = useRef(null);
+  let autoScrollInterval = useRef(null);
 
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
-  };
+  const offers = [
+    { title: "High-speed sailings to scenic destinations", img: "/src/images/Off1.jpg" },
+    { title: "Up to 20% OFF with Cokaliong Shipping Lines for passengers with cars", img: "/src/images/Off2.jpg" },
+    { title: "Samar Island: up to 10% OFF with Kho Shipping", img: "/src/images/Off3.jpg" },
+    { title: "Bicol: 10% OFF the return of Golden Star Ferries", img: "/src/images/Off4.jpg" },
+  ];
 
-  const scrollLeft = () => {
+  const infiniteOffers = [...offers, ...offers, ...offers];
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const scrollWidth = scrollContainer.scrollWidth / 3;
+    scrollContainer.scrollLeft = scrollWidth;
+
+    const autoScroll = () => {
+      if (scrollContainer) {
+        scrollContainer.scrollLeft += 1;
+        if (scrollContainer.scrollLeft >= scrollWidth * 2) {
+          scrollContainer.scrollLeft = scrollWidth;
+        } else if (scrollContainer.scrollLeft <= 0) {
+          scrollContainer.scrollLeft = scrollWidth;
+        }
+      }
+    };
+
+    autoScrollInterval.current = setInterval(autoScroll, 20);
+
+    return () => clearInterval(autoScrollInterval.current);
+  }, []);
+
+  const scroll = (direction) => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+      clearInterval(autoScrollInterval.current);
+      scrollRef.current.scrollBy({ left: direction * 300, behavior: "smooth" });
+
+      setTimeout(() => {
+        autoScrollInterval.current = setInterval(() => {
+          if (scrollRef.current) {
+            scrollRef.current.scrollLeft += 1;
+          }
+        }, 20);
+      }, 3000);
     }
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg max-w-6xl mx-auto">
-      {/* Header Section */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold flex items-center">
-          <span className="mr-2">🏷️</span> Latest Offers
-        </h2>
-        <button className="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-gray-300 transition">
-          View All Special Offers
-        </button>
-      </div>
+    <Box sx={{ backgroundColor: "Lightgrey", py: 4 }}>
+      <Container>
+        <Box sx={{ position: "relative" }}>
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} px={3}>
+            <Typography variant="h5" fontWeight="bold" display="flex" alignItems="center">
+              <span style={{ marginRight: 8 }}>🏷️</span> Latest Offers
+            </Typography>
+            <Button variant="contained" sx={{ backgroundColor: "#F5F5F5", color: "#000", textTransform: "none" }}>
+              View All Special Offers
+            </Button>
+          </Box>
 
-      {/* Scrollable Offers Section */}
-      <div className="relative overflow-hidden"> {/* Prevents vertical scrolling */}
-        <div
-          ref={scrollRef}
-          className="flex flex-nowrap space-x-4 overflow-x-auto scroll-smooth scrollbar-hide"
-          style={{
-            scrollbarWidth: "none", 
-            overflowX: "auto",
-            whiteSpace: "nowrap", /* Ensures items don’t wrap */
-            display: "flex", 
-            flexDirection: "row", /* Forces horizontal alignment */
-          }}
-        >
-          {[
-            {
-              title: "Greek Island: 30% OFF the return of Golden Star Ferries",
-              img: "/src/images/Logo.png",
-            },
-            {
-              title: "Up to 25% OFF with Golden Queen Fast Boat",
-              img: "/src/images/Logo.png",
-            },
-            {
-              title: "Baltic Sea: up to 40% OFF with Tallink Silja",
-              img: "/src/images/Logo.png",
-            },
-            {
-              title: "High-speed sailings to scenic destinations",
-              img: "/src/images/Logo.png",
-            },
-          ].map((offer, index) => (
-            <div
-              key={index}
-              className="min-w-[320px] rounded-lg shadow-md relative overflow-hidden"
+          <Box sx={{ position: "relative", overflow: "hidden", width: "100%" }}>
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: 10,
+                transform: "translateY(-50%)",
+                bgcolor: "white",
+                boxShadow: 2,
+                zIndex: 2,
+              }}
+              onClick={() => scroll(-1)}
             >
-              <img
-                src={offer.img} // Unique image for each offer
-                alt="Offer"
-                className="w-full h-44 object-cover rounded-lg"
-              />
-              {/* Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-blue-900 text-white p-3 rounded-b-lg">
-                <p className="text-xs flex items-center">🏷️ Offers and Promotions</p>
-                <h3 className="text-sm font-semibold">{offer.title}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
+              <ArrowBackIos />
+            </IconButton>
 
-        {/* Navigation Arrows on the Right Side */}
-        <div className="absolute top-1/2 right-0 transform -translate-y-1/2 flex flex-col space-y-2">
-          <button
-            className="bg-white p-3 rounded-full shadow-md hover:bg-gray-200 transition"
-            onClick={scrollLeft}
-          >
-            ◀
-          </button>
-          <button
-            className="bg-white p-3 rounded-full shadow-md hover:bg-gray-200 transition"
-            onClick={scrollRight}
-          >
-            ▶
-          </button>
-        </div>
-      </div>
-    </div>
+            <Box
+              ref={scrollRef}
+              sx={{
+                display: "flex",
+                gap: 15,
+                overflowX: "scroll",
+                scrollBehavior: "smooth",
+                scrollbarWidth: "none",
+                "&::-webkit-scrollbar": { display: "none" },
+                flexWrap: "nowrap",
+                whiteSpace: "nowrap",
+                width: "100%",
+              }}
+            >
+              {infiniteOffers.map((offer, index) => (
+                <Card
+                  key={index}
+                  sx={{
+                    minWidth: 250,
+                    minHeight: 250,
+                    borderRadius: 3,
+                    boxShadow: 3,
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <CardMedia component="img" height="250" image={offer.img} alt="Offer" sx={{ objectFit: "cover" }} />
+                  <CardContent
+                    sx={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      bgcolor: "rgba(0, 51, 102, 0.8)",
+                      color: "white",
+                      p: 2,
+                      textAlign: "center",
+                      textWrap: "stable",
+                    }}
+                  >
+                    <Typography variant="caption" fontWeight="bold" display="block">
+                      🏷️ Offers and Promotions
+                    </Typography>
+                    <Typography variant="body2" fontWeight="bold">
+                      {offer.title}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
+            </Box>
+
+            <IconButton
+              sx={{
+                position: "absolute",
+                top: "50%",
+                right: 10,
+                transform: "translateY(-50%)",
+                bgcolor: "white",
+                boxShadow: 2,
+                zIndex: 2,
+              }}
+              onClick={() => scroll(1)}
+            >
+              <ArrowForwardIos />
+            </IconButton>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 }

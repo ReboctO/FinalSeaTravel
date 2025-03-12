@@ -1,32 +1,9 @@
 import React from "react";
-import { Box, Button, Typography, Container, Card, CardContent, Grid } from "@mui/material";
+import { Button, Typography, Card, Grid, Box } from "@mui/material";
 
 export default function ContactUs() {
   return (
-    <Container sx={{ mt: 4, mb: 4, p: 0 }}>
-      {/* Contact Us Section */}
-      <Card sx={{ boxShadow: 2 }}>
-        <CardContent sx={{ textAlign: "center" }}>
-          <Typography variant="h5" fontWeight="bold" mb={1}>
-            Contact Us
-          </Typography>
-          <Typography variant="body1" color="textSecondary" mb={2}>
-            Have questions? Reach out to us and we’ll be happy to help!
-          </Typography>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#007BFF",
-              color: "white",
-              textTransform: "none",
-              "&:hover": { backgroundColor: "#0056b3" },
-            }}
-          >
-            Get in Touch
-          </Button>
-        </CardContent>
-      </Card>
-
+    <>
       {/* Why Use SEAVENTURES Section */}
       <Box
         sx={{
@@ -42,35 +19,18 @@ export default function ContactUs() {
         </Typography>
 
         <Box sx={{ display: "flex", justifyContent: "center", gap: 3, flexWrap: "wrap" }}>
-          {/* Feature 1 */}
-          <Card sx={{ boxShadow: 2, width: 280 }}>
-            <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Typography variant="h4">⛴️</Typography>
-              <Typography variant="body1">
-                Ferries from <strong>4412 routes</strong> and <strong>901 ports</strong> worldwide
-              </Typography>
-            </CardContent>
-          </Card>
-
-          {/* Feature 2 */}
-          <Card sx={{ boxShadow: 2, width: 280 }}>
-            <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Typography variant="h4">👥</Typography>
-              <Typography variant="body1">
-                Trusted by over <strong>2.5 million customers</strong>
-              </Typography>
-            </CardContent>
-          </Card>
-
-          {/* Feature 3 */}
-          <Card sx={{ boxShadow: 2, width: 280 }}>
-            <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Typography variant="h4">🏷️</Typography>
-              <Typography variant="body1">
-                We check up to <strong>1 million prices</strong> for our customers daily
-              </Typography>
-            </CardContent>
-          </Card>
+          {[ 
+            { icon: "⛴️", text: "Ferries from 4412 routes and 901 ports worldwide" },
+            { icon: "👥", text: "Trusted by over 2.5 million customers" },
+            { icon: "🏷️", text: "We check up to 1 million prices for our customers daily" },
+          ].map((feature, index) => (
+            <Card key={index} sx={{ boxShadow: 2, width: 280 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2, p: 2 }}>
+                <Typography variant="h4">{feature.icon}</Typography>
+                <Typography variant="body1">{feature.text}</Typography>
+              </Box>
+            </Card>
+          ))}
         </Box>
       </Box>
 
@@ -80,17 +40,7 @@ export default function ContactUs() {
           Our Partners
         </Typography>
         <Grid container spacing={2} justifyContent="center">
-          {[
-            "Fast Ferries",
-            "Blue Star Ferries",
-            "Buquebus",
-            "Colonia Express",
-            "DFDS",
-            "Hellenic Seaways",
-            "Interislander",
-            "P&O Ferries",
-            "Seajets",
-          ].map((partner, index) => (
+          {["Fast Ferries", "Blue Star Ferries", "Buquebus", "Colonia Express", "DFDS", "Hellenic Seaways", "Interislander", "P&O Ferries", "Seajets"].map((partner, index) => (
             <Grid item key={index}>
               <Box
                 sx={{
@@ -113,7 +63,7 @@ export default function ContactUs() {
       {/* Customer Service Section with Background Image */}
       <Box
         sx={{
-          backgroundImage: "url('/src/images/BG.jpg')",
+          backgroundImage: "url('/src/images/BG1.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           color: "white",
@@ -163,6 +113,27 @@ export default function ContactUs() {
           Need Help?
         </Button>
       </Box>
-    </Container>
+
+      {/* Contact Us Section */}
+      <Card sx={{ boxShadow: 2, m: 4, textAlign: "center", p: 4 }}>
+        <Typography variant="h5" fontWeight="bold" mb={1}>
+          Contact Us
+        </Typography>
+        <Typography variant="body1" color="textSecondary" mb={2}>
+          Have questions? Reach out to us and we’ll be happy to help!
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#007BFF",
+            color: "white",
+            textTransform: "none",
+            "&:hover": { backgroundColor: "#0056b3" },
+          }}
+        >
+          Get in Touch
+        </Button>
+      </Card>
+    </>
   );
 }
