@@ -10,22 +10,31 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { SwapHoriz, } from "@mui/icons-material";
+import { SwapHoriz } from "@mui/icons-material";
 import LatestOffers from "./LatestOffers";
 import ContactUs from "./ContactUs";
-
-
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
   const [shippingLine, setShippingLine] = useState("Lite Ferries");
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
 
   const incrementAdults = () => setAdults(adults + 1);
   const decrementAdults = () => setAdults(adults > 0 ? adults - 1 : 0);
-  
+
   const incrementChildren = () => setChildren(children + 1);
   const decrementChildren = () => setChildren(children > 0 ? children - 1 : 0);
+
+  const handleFindTicket = () => {
+    navigate(
+      `/transaction?origin=${origin}&destination=${destination}&date=${departureDate}&shippingLine=${shippingLine}&adults=${adults}&children=${children}`
+    );
+  };
 
   return (
     <>
@@ -53,7 +62,7 @@ export default function Home() {
               maxWidth: "550px",
               margin: "auto",
               fontFamily: "Roboto, sans-serif",
-              borderRadius: "15px"
+              borderRadius: "15px",
             }}
           >
             <Typography variant="h4" fontWeight="bold" mb={5} margin={2.5}>
@@ -82,6 +91,8 @@ export default function Home() {
                 variant="outlined"
                 size="small"
                 fullWidth
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
                 sx={{
                   backgroundColor: "white",
                   borderRadius: "5px",
@@ -98,6 +109,8 @@ export default function Home() {
                 variant="outlined"
                 size="small"
                 fullWidth
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
                 sx={{
                   backgroundColor: "white",
                   borderRadius: "5px",
@@ -118,6 +131,8 @@ export default function Home() {
                 variant="outlined"
                 size="small"
                 fullWidth
+                value={departureDate}
+                onChange={(e) => setDepartureDate(e.target.value)}
                 sx={{
                   gridColumn: "span 3",
                   backgroundColor: "white",
@@ -161,115 +176,32 @@ export default function Home() {
                 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography
-                    variant="body2"
-                    mr={1}
-                    sx={{ fontFamily: "Roboto, sans-serif" }}
-                  >
+                  <Typography variant="body2" mr={1}>
                     Adults
-                    <br />
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        fontSize: "10px",
-                        fontStyle: "italic",
-                        fontFamily: "Roboto, sans-serif",
-                        display: "block",
-                        color: "rgba(255,255,255,0.7)",
-                      }}
-                    >
-                      Age 6 and over
-                    </Typography>
                   </Typography>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    sx={{
-                      backgroundColor: "beige",
-                      color: "black",
-                      minWidth: "30px",
-                    }}
-                    onClick={decrementAdults}
-                  >
-                    -
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    sx={{ margin: "0 10px", fontFamily: "Roboto, sans-serif" }}
-                  >
+                  <Button onClick={decrementAdults}>-</Button>
+                  <Typography variant="body1" sx={{ margin: "0 10px" }}>
                     {adults}
                   </Typography>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    sx={{
-                      backgroundColor: "beige",
-                      color: "black",
-                      minWidth: "30px",
-                    }}
-                    onClick={incrementAdults}
-                  >
-                    +
-                  </Button>
+                  <Button onClick={incrementAdults}>+</Button>
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography
-                    variant="body2"
-                    mr={1}
-                    sx={{ fontFamily: "Roboto, sans-serif" }}
-                  >
+                  <Typography variant="body2" mr={1}>
                     Children
-                    <br />
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        fontSize: "10px",
-                        fontStyle: "italic",
-                        fontFamily: "Roboto, sans-serif",
-                        display: "block",
-                        color: "rgba(255,255,255,0.7)",
-                      }}
-                    >
-                      2-5 years old
-                    </Typography>
                   </Typography>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    sx={{
-                      backgroundColor: "beige",
-                      color: "black",
-                      minWidth: "30px",
-                    }}
-                    onClick={decrementChildren}
-                  >
-                    -
-                  </Button>
-                  <Typography
-                    variant="body1"
-                    sx={{ margin: "0 10px", fontFamily: "Roboto, sans-serif" }}
-                  >
+                  <Button onClick={decrementChildren}>-</Button>
+                  <Typography variant="body1" sx={{ margin: "0 10px" }}>
                     {children}
                   </Typography>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    sx={{
-                      backgroundColor: "beige",
-                      color: "black",
-                      minWidth: "30px",
-                    }}
-                    onClick={incrementChildren}
-                  >
-                    +
-                  </Button>
+                  <Button onClick={incrementChildren}>+</Button>
                 </Box>
               </Box>
 
               <Button
                 variant="contained"
                 fullWidth
+                onClick={handleFindTicket}
                 sx={{
                   backgroundColor: "#0855b1",
                   color: "white",
@@ -281,11 +213,20 @@ export default function Home() {
               >
                 Find Your Ticket
               </Button>
-              <Button variant="outlined" fullWidth sx={{borderColor:"rgba(80, 90, 91, 0.5)", 
-                backgroundColor: "#0855b1", 
-                color: "white", fontWeight: "bold", 
-                "&:hover": { backgroundColor: "#505A5B" }, 
-                gridColumn: "span 3", marginTop: "10px" }}>
+
+              <Button
+                variant="outlined"
+                fullWidth
+                sx={{
+                  borderColor: "rgba(80, 90, 91, 0.5)",
+                  backgroundColor: "#0855b1",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&:hover": { backgroundColor: "#505A5B" },
+                  gridColumn: "span 3",
+                  marginTop: "10px",
+                }}
+              >
                 Manage My Bookings
               </Button>
             </Box>
