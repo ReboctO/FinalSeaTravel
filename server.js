@@ -107,6 +107,69 @@ app.post("/api/book-ticket", (req, res) => {
     });
 });
 
+
+// SIGN IN FUNCTION
+app.post("/api/signin", (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required" });
+    }
+
+    const query = `SELECT * FROM users WHERE EMAIL_NAME = ? AND PASSWORD = ?`;
+    
+    db.query(query, [email, password], (err, results) => {
+        if (err) {
+            console.error("Signin error:", err);
+            return res.status(500).json({ error: "Database error" });
+        }
+        
+        if (results.length === 0) {
+            return res.status(401).json({ error: "Invalid email or password" });
+        }
+        
+        // Return user data (excluding password)
+        const user = results[0];
+        const { PASSWORD, ...userData } = user;
+        res.json({ 
+            message: "Sign in successful", 
+            user: userData 
+        });
+    });
+});
+
+
+
+// SIGN UP FUNCTION
+app.post("/api/signup", (req, res) => {
+    const { firstName, lastName, email, password, contactNumber, address } = req.body;
+
+    // Basic validation
+    if (!email || !password) {
+        return res.status(400).json({ error: "Email and password are required" });
+    }
+
+    const query = `
+        INSERT INTO users 
+        (FIRST_NAME, LAST_NAME, EMAIL_NAME, PASSWORD, CONTACT_NUMBER, ADDRESS) 
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    db.query(query, 
+        [firstName, lastName, email, password, contactNumber, address], 
+        (err, result) => {
+            if (err) {
+                console.error("Signup error:", err);
+                if (err.code === 'ER_DUP_ENTRY') {
+                    return res.status(400).json({ error: "Email already exists" });
+                }
+                return res.status(500).json({ error: "Database error" });
+            }
+            res.json({ message: "Sign up successful!", userId: result.insertId });
+        }
+    );
+});
+
 /* ========================================================
     🚀 **Start Server**
 ======================================================== */

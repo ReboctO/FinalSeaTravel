@@ -7,6 +7,7 @@ import Transaction from "./pages/Transaction";
 import LatestOffers from "./pages/LatestOffers";
 import ContactUs from "./pages/ContactUs";
 import SignIn from "./pages/SignIn";
+import SignUp from './pages/SignUp';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/latestOffers" element={<LatestOffers />} />
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           </Routes>
         <Footer />
       </BrowserRouter>

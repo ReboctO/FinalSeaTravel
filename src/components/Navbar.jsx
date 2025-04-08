@@ -5,51 +5,15 @@ import {
   Typography,
   Button,
   Box,
-<<<<<<< HEAD
-=======
   Container,
   TextField,
   Select,
   MenuItem,
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
   IconButton,
   Drawer,
   List,
   ListItem,
   ListItemText,
-<<<<<<< HEAD
-} from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-
-export default function Navbar() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  return (
-    <>
-      <AppBar
-        position="fixed"
-        sx={{
-          backgroundColor: "#003366",
-          color: "white",
-          boxShadow: "none",
-          top: 0,
-          zIndex: 1100,
-          width: "100%",
-        }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 3 }}>
-          {/* Logo */}
-          <Box
-            sx={{ display: "flex", alignItems: "center", gap: 1 }}
-            component={Link}
-            to="/"
-          >
-            <img
-              src="src/images/Logo.png"
-              alt="Ship Logo"
-              style={{
-                height: "80px",
-=======
   InputAdornment
 } from "@mui/material";
 import { Menu as MenuIcon, SwapHoriz } from "@mui/icons-material";
@@ -70,7 +34,6 @@ const Navbar = () => {
               alt="Ship Logo"
               style={{
                 height: "70px",
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
                 width: "80px",
               }}
             />
@@ -81,10 +44,6 @@ const Navbar = () => {
                 fontFamily: "Poppins",
                 fontSize: { xs: "20px", sm: "25px", md: "30px" },
                 fontStyle: "italic",
-<<<<<<< HEAD
-                color: "white",
-=======
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
               }}
             >
               S E A T R A V E L S
@@ -92,40 +51,6 @@ const Navbar = () => {
           </Box>
 
           {/* Desktop Menu */}
-<<<<<<< HEAD
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              alignItems: "center",
-              gap: 3,
-            }}
-          >
-            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/">
-              Home
-            </Button>
-            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/transaction">
-              Transaction
-            </Button>
-            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/latestOffers">
-              Latest Offers
-            </Button>
-            <Button sx={{ color: "white", fontSize: "12px" }} component={Link} to="/contactUs">
-              Contact Us
-            </Button>
-            <Button sx={{ color: "white", fontSize: "12px" }}>ID</Button>
-            <span style={{ color: "white" }}>|</span>
-            <Button sx={{ color: "white", fontSize: "12px" }}>EN</Button>
-            <Button
-              variant="outlined"
-              sx={{
-                color: "white",
-                borderColor: "white",
-                fontSize: "12px",
-                "&:hover": { borderColor: "#CCC", color: "#CCC" },
-              }}
-              component={Link}
-              to="/SignIn"
-=======
           <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", gap: 3 }}>
             <Button sx={{ color: "black", fontSize: "12px" }}>Home</Button>
             <Button sx={{ color: "black", fontSize: "12px" }}>Transaction</Button>
@@ -142,49 +67,18 @@ const Navbar = () => {
                 fontSize: "12px",
                 "&:hover": { borderColor: "#666", color: "#666" },
               }}
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
             >
               Sign In
             </Button>
           </Box>
 
           {/* Mobile Menu Button */}
-<<<<<<< HEAD
-          <IconButton
-            sx={{ display: { xs: "block", md: "none" }, color: "white" }}
-            onClick={() => setDrawerOpen(true)}
-          >
-=======
           <IconButton sx={{ display: { xs: "block", md: "none" } }} onClick={() => setDrawerOpen(true)}>
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
 
-<<<<<<< HEAD
-      {/* Spacer to prevent content from hiding under navbar */}
-      <Box sx={{ height: "80px" }} />
-
-      {/* Mobile Drawer */}
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        sx={{ ".MuiDrawer-paper": { backgroundColor: "#003366" } }}
-      >
-        <List>
-          {["Home", "Transaction", "Latest Offers", "Contact Us", "ID", "EN", "Sign In"].map(
-            (text) => (
-              <ListItem button key={text} onClick={() => setDrawerOpen(false)}>
-                <ListItemText
-                  primary={text}
-                  sx={{ color: "white", textAlign: "center" }}
-                />
-              </ListItem>
-            )
-          )}
-=======
       {/* Mobile Drawer */}
       <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <List>
@@ -193,14 +87,10 @@ const Navbar = () => {
               <ListItemText primary={text} />
             </ListItem>
           ))}
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
         </List>
       </Drawer>
     </>
   );
-<<<<<<< HEAD
-}
-=======
 };
 
 const HeroSection = () => {
@@ -414,4 +304,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
->>>>>>> 674093177fd36da428e70274671d35bf2cccaebc
