@@ -123,6 +123,31 @@ const SignUp = () => {
                     </Link>
                 </Typography>
 
+                 <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 3 }}>
+                                    <Button 
+                                        variant="contained" 
+                                        sx={{ 
+                                            backgroundColor: "#1877F2", 
+                                            color: "white",
+                                            flex: 1,
+                                            textTransform: "none"
+                                        }}
+                                    >
+                                        <FacebookIcon sx={{ mr: 1 }} /> Facebook
+                                    </Button>
+                                    <Button 
+                                        variant="contained" 
+                                        sx={{ 
+                                            backgroundColor: "#DB4437", 
+                                            color: "white",
+                                            flex: 1,
+                                            textTransform: "none"
+                                        }}
+                                    >
+                                        <GoogleIcon sx={{ mr: 1 }} /> Google
+                                    </Button>
+                                </Box>
+
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Box sx={{ display: "flex", gap: 2 }}>
                         <TextField

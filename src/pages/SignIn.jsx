@@ -78,7 +78,7 @@ const SignIn = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundImage: 'url("src/images/BG.jpg")',
+                backgroundImage: 'url("src/images/BG1.jpg")',
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 py: 4,
